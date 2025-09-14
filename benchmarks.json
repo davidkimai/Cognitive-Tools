@@ -1,0 +1,196 @@
+{
+  "AIME2024": [
+    {
+      "question": "Find the number of ordered pairs $(a,b)$ of integers such that $|a + bi| = \\sqrt{a^2 + b^2} = 13$",
+      "answer": "12",
+      "concepts": ["Complex numbers", "Distance formula", "Integer solutions"],
+      "difficulty": "hard"
+    },
+    {
+      "question": "Rick is thinking of a positive factor of 14 and Steve is thinking of a positive factor of 42. If Rick and Steve are thinking of the same number, how many possible numbers could they be thinking of?",
+      "answer": "4",
+      "concepts": ["Number theory", "Factors", "Set intersection"],
+      "difficulty": "medium"
+    },
+    {
+      "question": "Find the greatest common divisor of 3339, 2961, and 1491.",
+      "answer": "21",
+      "concepts": ["Number theory", "Euclidean algorithm", "Prime factorization"],
+      "difficulty": "hard"
+    },
+    {
+      "question": "How many three-digit positive integers have the property that their digits, when read from left to right, form an arithmetic sequence?",
+      "answer": "45",
+      "concepts": ["Arithmetic sequences", "Digit constraints", "Counting"],
+      "difficulty": "medium"
+    },
+    {
+      "question": "In triangle ABC, AB = 13, BC = 14, and CA = 15. Let M be the midpoint of BC and let D be the foot of the altitude from A to BC. Find MD.",
+      "answer": "33/14",
+      "concepts": ["Geometry", "Triangle properties", "Altitude", "Midpoint"],
+      "difficulty": "hard"
+    }
+  ],
+  "MATH500": [
+    {
+      "question": "Solve the equation $x^2 - 5x + 6 = 0$",
+      "answer": "x = 2, 3",
+      "concepts": ["Algebra", "Quadratic equations", "Factoring"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Find the derivative of $f(x) = \\sin(x^2)$",
+      "answer": "f'(x) = 2x\\cos(x^2)",
+      "concepts": ["Calculus", "Chain rule", "Trigonometric functions"],
+      "difficulty": "medium"
+    },
+    {
+      "question": "Simplify $\\frac{x^2 - 4}{x^2 - 4x + 4}$",
+      "answer": "\\frac{x + 2}{x - 2}",
+      "concepts": ["Algebra", "Factoring", "Rational expressions"],
+      "difficulty": "medium"
+    },
+    {
+      "question": "If $\\log_2 x = 3$, find the value of $x$",
+      "answer": "8",
+      "concepts": ["Logarithms", "Exponential equations"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Find the area under the curve $y = x^2$ from $x = 0$ to $x = 3$",
+      "answer": "9",
+      "concepts": ["Calculus", "Integration", "Definite integrals"],
+      "difficulty": "medium"
+    },
+    {
+      "question": "Solve the system: $2x + 3y = 7$, $x - y = 1$",
+      "answer": "x = 2, y = 1",
+      "concepts": ["Algebra", "Systems of equations", "Linear equations"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Find all solutions to $\\sin(2x) = \\frac{1}{2}$ in the interval $[0, 2\\pi)$",
+      "answer": "x = \\frac{\\pi}{12}, \\frac{5\\pi}{12}, \\frac{13\\pi}{12}, \\frac{17\\pi}{12}",
+      "concepts": ["Trigonometry", "Trigonometric equations", "Unit circle"],
+      "difficulty": "hard"
+    },
+    {
+      "question": "If $f(x) = x^3 - 2x^2 + x - 1$, find $f'(2)$",
+      "answer": "5",
+      "concepts": ["Calculus", "Derivatives", "Polynomial functions"],
+      "difficulty": "easy"
+    }
+  ],
+  "AMC": [
+    {
+      "question": "What is 15% of 80?",
+      "answer": "12",
+      "concepts": ["Arithmetic", "Percentages"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "How many prime numbers are less than 20?",
+      "answer": "8",
+      "concepts": ["Number theory", "Prime numbers"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "In how many ways can 5 people sit around a circular table?",
+      "answer": "24",
+      "concepts": ["Combinatorics", "Circular permutations"],
+      "difficulty": "medium"
+    },
+    {
+      "question": "If $2^x = 32$, what is the value of $x$?",
+      "answer": "5",
+      "concepts": ["Exponents", "Exponential equations"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Find the sum of the first 10 positive integers",
+      "answer": "55",
+      "concepts": ["Arithmetic", "Series", "Formulas"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "What is the area of a triangle with base 8 and height 6?",
+      "answer": "24",
+      "concepts": ["Geometry", "Triangle area"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Solve for $x$: $3x + 7 = 22$",
+      "answer": "5",
+      "concepts": ["Algebra", "Linear equations"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "What is the greatest common divisor of 48 and 18?",
+      "answer": "6",
+      "concepts": ["Number theory", "GCD", "Euclidean algorithm"],
+      "difficulty": "medium"
+    }
+  ],
+  "Smolbenchmark": [
+    {
+      "question": "Find the GCD of 48 and 18",
+      "answer": "6",
+      "concepts": ["Number theory", "GCD"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Evaluate 3! + 4!",
+      "answer": "30",
+      "concepts": ["Combinatorics", "Factorials"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Solve $x^2 - 7x + 12 = 0$",
+      "answer": "x = 3, 4",
+      "concepts": ["Algebra", "Quadratic equations"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "What is the slope of the line passing through points (2, 3) and (5, 9)?",
+      "answer": "2",
+      "concepts": ["Geometry", "Linear functions", "Slope"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "If $\\log_3 x = 2$, find $x$",
+      "answer": "9",
+      "concepts": ["Logarithms", "Exponential equations"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Find the sum of the interior angles of a hexagon",
+      "answer": "720",
+      "concepts": ["Geometry", "Polygons", "Angle sum"],
+      "difficulty": "medium"
+    },
+    {
+      "question": "What is the probability of getting exactly 2 heads in 3 coin flips?",
+      "answer": "3/8",
+      "concepts": ["Probability", "Combinations", "Binomial"],
+      "difficulty": "medium"
+    },
+    {
+      "question": "Simplify $\\sqrt{50}$",
+      "answer": "5√2",
+      "concepts": ["Algebra", "Radicals", "Simplification"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "Find the distance between points (1, 2) and (4, 6)",
+      "answer": "5",
+      "concepts": ["Geometry", "Distance formula", "Coordinate plane"],
+      "difficulty": "easy"
+    },
+    {
+      "question": "If a rectangle has length 8 and width 5, what is its perimeter?",
+      "answer": "26",
+      "concepts": ["Geometry", "Perimeter", "Rectangle"],
+      "difficulty": "easy"
+    }
+  ]
+}
