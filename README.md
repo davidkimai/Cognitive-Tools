@@ -31,8 +31,8 @@ This minimal structure maximizes information density while ensuring immediate ac
 
 ### Installation
 ```bash
-git clone https://github.com/yourusername/cognitive-tools-llm.git
-cd cognitive-tools-llm
+git clone https://github.com/davidkimai/Cognitive-Tools.git
+cd Cognitive-Tools
 pip install -r requirements.txt
 ```
 
