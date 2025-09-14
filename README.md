@@ -1,6 +1,6 @@
 # Cognitive Tools for Large Language Model Reasoning
 
-Minimal practical implementation of "Eliciting Reasoning in Language Models with Cognitive Tools" (Ebouky et al., 2025) - a modular framework that enhances LLM reasoning through cognitive psychology-inspired tools without requiring additional training.
+Minimal practical implementation of "[Eliciting Reasoning in Language Models with Cognitive Tools](arxiv.org/abs/2506.12115)" (Ebouky et al., 2025) - a modular framework that enhances LLM reasoning through cognitive psychology-inspired tools without requiring additional training.
 
 ## Core Contribution
 
