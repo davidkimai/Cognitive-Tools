@@ -1,7 +1,7 @@
 # Cognitive Tools for LLM Reasoning
 
 ```
-cognitive-tools-llm/
+Cognitive-Tools/
 ├── README.md                    # Complete guide: theory, usage, results
 ├── cognitive_tools.py           # Core implementation: all 4 tools + orchestrator
 ├── reproduce_paper.py           # Exact reproduction of paper experiments  
