@@ -6,10 +6,16 @@ principles for enhancing LLM reasoning without reinforcement learning.
 
 Based on: "Eliciting Reasoning in Language Models with Cognitive Tools" 
 (Ebouky et al., 2025)
+
+JUPYTER/COLAB USAGE:
+    from cognitive_tools import CognitiveToolsOrchestrator, run_demo
+    orchestrator = CognitiveToolsOrchestrator()
+    run_demo()  # Interactive demonstration
 """
 
 import json
 import re
+import asyncio
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
@@ -80,8 +86,6 @@ Question: {question}
 
 Provide a structured analysis following the guidelines above."""
 
-        # In practice, this would call the LLM with the prompt
-        # For now, return the prompt structure
         return ToolResponse(
             content=f"TOOL_PROMPT: understand_question\n{prompt}",
             metadata={"tool": "understand_question", "prompt": prompt}
@@ -282,6 +286,11 @@ class CognitiveToolsOrchestrator:
     """
     Main orchestrator for cognitive tools reasoning framework.
     Manages tool calling, execution flow, and response integration.
+    
+    JUPYTER USAGE:
+        orchestrator = CognitiveToolsOrchestrator(llm_interface)
+        system_prompt = orchestrator.get_system_prompt()
+        response = orchestrator.execute_tool(ToolCall("understand_question", {"question": "..."}))
     """
     
     def __init__(self, llm_interface=None):
@@ -335,10 +344,8 @@ Now Begin! If you solve the task correctly, you will receive a reward of $1,000,
         """Extract tool calls from LLM response text"""
         tool_calls = []
         
-        # Simple pattern matching for tool calls - in practice would be more sophisticated
         for tool_name in self.tools.keys():
             if tool_name in text.lower():
-                # Extract parameters if present
                 parameters = {"question": "", "context": text}
                 tool_calls.append(ToolCall(name=tool_name, parameters=parameters))
                 
@@ -355,42 +362,36 @@ Now Begin! If you solve the task correctly, you will receive a reward of $1,000,
         tool = self.tools[tool_call.name]
         return tool.execute(**tool_call.parameters)
     
-    def solve_problem(self, question: str, max_iterations: int = 10) -> str:
+    async def solve_problem(self, question: str, max_iterations: int = 10) -> str:
         """
         Main problem solving loop using cognitive tools.
         
-        This is a simplified version - in practice would integrate with actual LLM APIs
-        and handle the full conversation flow with tool calling.
+        JUPYTER USAGE:
+            result = await orchestrator.solve_problem("Find the GCD of 3339, 2961, and 1491.")
+            print(result)
         """
         system_prompt = self.get_system_prompt()
         conversation_history = []
         
-        # Initial prompt
         user_prompt = f"Solve the math problem: '{question}'"
         conversation_history.append({"role": "system", "content": system_prompt})
         conversation_history.append({"role": "user", "content": user_prompt})
         
         for iteration in range(max_iterations):
             if self.llm_interface:
-                # Get LLM response
-                response = self.llm_interface.generate(conversation_history)
+                response = await self.llm_interface.generate(conversation_history)
                 conversation_history.append({"role": "assistant", "content": response})
                 
-                # Check for final answer
                 if "ANSWER:" in response:
                     return response
                 
-                # Extract and execute tool calls
                 tool_calls = self.extract_tool_calls(response)
                 
                 for tool_call in tool_calls:
                     tool_response = self.execute_tool(tool_call)
-                    
-                    # Add tool response to conversation
                     tool_message = f"Tool '{tool_call.name}' executed:\n{tool_response.content}"
                     conversation_history.append({"role": "system", "content": tool_message})
             else:
-                # For demonstration without actual LLM
                 break
                 
         return "Problem solving completed (no LLM interface provided)"
@@ -399,20 +400,41 @@ Now Begin! If you solve the task correctly, you will receive a reward of $1,000,
 # Utility functions for evaluation and benchmarking
 
 def parse_answer(response: str) -> Optional[str]:
-    """Extract final answer from LLM response"""
+    """
+    Extract final answer from LLM response
+    
+    JUPYTER USAGE:
+        answer = parse_answer("Let me solve this step by step... ANSWER: 42")
+        print(answer)  # "42"
+    """
     match = re.search(r'ANSWER:\s*(.+)', response, re.IGNORECASE)
     return match.group(1).strip() if match else None
 
 
 def evaluate_accuracy(predictions: List[str], ground_truth: List[str]) -> float:
-    """Calculate pass@1 accuracy"""
+    """
+    Calculate pass@1 accuracy
+    
+    JUPYTER USAGE:
+        preds = ["42", "7", "15"]
+        truth = ["42", "8", "15"] 
+        accuracy = evaluate_accuracy(preds, truth)
+        print(f"Accuracy: {accuracy:.1%}")  # "Accuracy: 66.7%"
+    """
     correct = sum(1 for pred, gt in zip(predictions, ground_truth) 
                   if pred.strip() == gt.strip())
     return correct / len(predictions) if predictions else 0.0
 
 
 class CognitiveToolsConfig:
-    """Configuration for cognitive tools framework"""
+    """
+    Configuration for cognitive tools framework
+    
+    JUPYTER USAGE:
+        config = CognitiveToolsConfig()
+        config.max_iterations = 15
+        config.enable_tools = ["understand_question", "examine_answer"]
+    """
     
     def __init__(self):
         self.max_iterations = 10
@@ -421,32 +443,104 @@ class CognitiveToolsConfig:
         self.require_final_answer = True
 
 
-# Example usage and demonstration
+# Demonstration functions for Jupyter/Colab usage
 
-def demo_cognitive_tools():
-    """Demonstrate cognitive tools on a sample problem"""
+def run_demo():
+    """
+    Run interactive demonstration of cognitive tools
+    
+    JUPYTER USAGE:
+        from cognitive_tools import run_demo
+        run_demo()
+    """
+    print("COGNITIVE TOOLS FRAMEWORK DEMONSTRATION")
+    print("=" * 50)
+    
     orchestrator = CognitiveToolsOrchestrator()
     
     # Sample problem
     question = "Find the greatest common divisor of 3339, 2961, and 1491."
     
-    print("=== Cognitive Tools Demo ===")
-    print(f"Problem: {question}\n")
+    print(f"Sample Problem: {question}\n")
     
-    # Show system prompt
-    print("System Prompt:")
-    print(orchestrator.get_system_prompt())
-    print("\n" + "="*50 + "\n")
+    print("System Prompt Structure:")
+    print(orchestrator.get_system_prompt()[:200] + "...")
+    print("\nTools Available:")
     
-    # Demonstrate individual tools
     for tool_name, tool in orchestrator.tools.items():
-        print(f"Tool: {tool.name}")
-        print(f"Description: {tool.description}")
+        print(f"- {tool.name}: {tool.description}")
+    
+    print(f"\nCorrect Answer: 21")
+    print("Note: Connect an LLM interface to see full problem solving in action")
+
+
+def get_tool_prompts() -> Dict[str, str]:
+    """
+    Get all cognitive tool prompts for analysis
+    
+    JUPYTER USAGE:
+        prompts = get_tool_prompts()
+        print(prompts["understand_question"][:100])
+    """
+    orchestrator = CognitiveToolsOrchestrator()
+    prompts = {}
+    
+    sample_question = "Find the GCD of 48 and 18"
+    
+    for tool_name, tool in orchestrator.tools.items():
+        if tool_name in ["examine_answer", "backtracking"]:
+            response = tool.execute(
+                question=sample_question,
+                current_reasoning="Used Euclidean algorithm"
+            )
+        else:
+            response = tool.execute(question=sample_question)
         
-        response = tool.execute(question=question)
-        print(f"Response: {response.content[:200]}...")
-        print("\n" + "-"*30 + "\n")
+        # Extract prompt from metadata
+        if response.metadata and "prompt" in response.metadata:
+            prompts[tool_name] = response.metadata["prompt"]
+        else:
+            prompts[tool_name] = response.content
+    
+    return prompts
 
 
-if __name__ == "__main__":
-    demo_cognitive_tools()
+def create_sample_llm_interface():
+    """
+    Create a sample LLM interface for testing
+    
+    JUPYTER USAGE:
+        llm = create_sample_llm_interface()
+        orchestrator = CognitiveToolsOrchestrator(llm)
+        result = await orchestrator.solve_problem("What is 2+2?")
+    """
+    class SampleLLM:
+        async def generate(self, messages):
+            # Simple demo responses
+            last_message = messages[-1]["content"].lower()
+            
+            if "2+2" in last_message or "what is 2+2" in last_message:
+                return "Let me solve this: 2 + 2 = 4. ANSWER: 4"
+            elif "gcd" in last_message and "48" in last_message:
+                return "I need to find GCD(48, 18). Using Euclidean algorithm: 48 = 18×2 + 12, 18 = 12×1 + 6, 12 = 6×2 + 0. ANSWER: 6"
+            else:
+                return "ANSWER: [Demo response - connect real LLM for full functionality]"
+    
+    return SampleLLM()
+
+
+# Make key components easily accessible for imports
+__all__ = [
+    'CognitiveToolsOrchestrator',
+    'UnderstandQuestionTool', 
+    'RecallRelatedTool',
+    'ExamineAnswerTool',
+    'BacktrackingTool',
+    'ToolCall',
+    'ToolResponse',
+    'parse_answer',
+    'evaluate_accuracy',
+    'run_demo',
+    'get_tool_prompts',
+    'create_sample_llm_interface'
+]
